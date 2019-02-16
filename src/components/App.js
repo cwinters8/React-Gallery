@@ -6,9 +6,9 @@ import '../App.css';
 import apikey from './config.js';
 
 // App components
-
 import SearchForm from './Search';
 import Nav from './Nav';
+import Gallery from './Gallery';
 
 class App extends Component {
   render() {
@@ -16,6 +16,7 @@ class App extends Component {
       <div className="container">
         <SearchForm />
         <Nav />
+        <Gallery />
       </div>
     );
   }
