@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 // style and config
-// import logo from '../logo.svg';
 import '../App.css';
 import apikey from './config.js';
 
