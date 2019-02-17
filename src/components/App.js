@@ -36,7 +36,7 @@ class App extends Component {
     return (
       <div className="container">
         <SearchForm performSearch={this.performSearch} />
-        <Nav />
+        <Nav performSearch={this.performSearch} />
         <Gallery data={this.state.pics} />
       </div>
     );
