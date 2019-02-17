@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+// import {Redirect} from 'react-router-dom';
 
 class SearchForm extends Component {
   
   handleSubmit = e => {
+    const searchTerm = this.query.value;
     e.preventDefault();
-    this.props.performSearch(this.query.value);
+    this.props.history.push(`/${searchTerm}`);
+    this.props.performSearch(searchTerm);
     e.currentTarget.reset();
   }
   
