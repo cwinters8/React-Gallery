@@ -5,9 +5,6 @@ import GalleryItem from './GalleryItem';
 import NoResults from './NoResults';
 
 const Gallery = (props) => {
-    if (props.match) {
-        props.performSearch(props.match.params.searchTerm);
-    }
     let pics;
     if (props.data.length > 0) {
         pics = props.data.map(pic => {
