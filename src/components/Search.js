@@ -7,7 +7,7 @@ class SearchForm extends Component {
     const searchTerm = this.query.value;
     e.preventDefault();
     this.props.history.push(`/search/${searchTerm}`);
-    this.props.retrieveImages(searchTerm);
+    this.props.setSearch(searchTerm);
     e.currentTarget.reset();
   }
   

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 
 // style and config
@@ -20,14 +20,12 @@ class App extends Component {
     super();
     this.state = {
       pics: [],
-      cats: [],
-      dogs: [],
-      computers: []
+      computers: [],
+      search: null
     };
   }
 
   componentDidMount() {
-    // console.log(window.location.pathname)
     const searchTerm = window.location.pathname.match(/^\/search\/(\w+)/);
     if (searchTerm) {
       this.retrieveImages(searchTerm[1]);
@@ -50,36 +48,37 @@ class App extends Component {
   retrieveImages = (query = 'mountains', state = 'pics') => {
     this.runFetch(query, data => {
       this.setState({
-        [state]: data.photos.photo
+        [state]: data.photos.photo,
+        search: null
       })
     })
   }
 
-  performSearch = (searchTerm) => {
-    let photos;
-    this.runFetch(searchTerm, data => {
-      photos = data.photos.photo;
-      return <Gallery data={photos} />;
+  setSearch = (searchTerm) => {
+    this.setState({
+      search: searchTerm
     })
-    
-    
+  }
+
+  searchRedirect = () => {
+    if (this.state.search) {
+      this.retrieveImages(this.state.search);
+      return <Redirect to={`/search/${this.state.search}`} />;
+    }
   }
 
   render() {
     return (
       <BrowserRouter>
         <div className="container">
-          <Route path="/" render={() => <SearchForm retrieveImages={this.retrieveImages} history={history} />} />
-          <Nav />
+          <Route path="/" render={() => <SearchForm setSearch={this.setSearch} history={history} />} />
+          <Nav setSearch={this.setSearch} />
           <Switch>
             {/* Default route */}
             <Route exact path="/" render={() => <Gallery data={this.state.pics}/>} />
-            {/* Nav */}
-            <Route exact path="/search/cats" render={() => <Gallery data={this.state.cats}/>} />
-            <Route exact path="/search/dogs" render={() => <Gallery data={this.state.dogs}/>} />
-            <Route exact path="/search/computers" render={() => <Gallery data={this.state.computers}/>} />
             {/* Search */}
-            <Route path="/search/:term" render={() => <Gallery data={this.state.pics}/>} /> */}
+            <Route path="/search/:term" render={() => <Gallery data={this.state.pics}/>} />
+            {this.searchRedirect()}
           </Switch>
         </div>
       </BrowserRouter>
