@@ -6,7 +6,8 @@ import NoResults from './NoResults';
 
 const Gallery = (props) => {
     let pics;
-    // console.log(props);
+    // return a gallery item to render for each photo found in props data
+    // if none found, render NoResults element
     if (props.data.length > 0) {
         pics = props.data.map(pic => {
             return(<GalleryItem desc={pic.title} key={pic.id} img={`https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`} />)

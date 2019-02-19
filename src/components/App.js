@@ -19,11 +19,11 @@ class App extends Component {
     super();
     this.state = {
       pics: [],
-      computers: [],
       search: null
     };
   }
 
+  // retrieves images based on the URL when the App mounts
   componentDidMount() {
     const searchTerm = window.location.pathname.match(/^\/search\/(\w+)/);
     if (searchTerm) {
@@ -31,11 +31,9 @@ class App extends Component {
     } else {
       this.retrieveImages();
     }
-    this.retrieveImages('cats', 'cats');
-    this.retrieveImages('dogs', 'dogs');
-    this.retrieveImages('computers', 'computers');
   }
 
+  // helper function to run the API call
   runFetch = (query, callback) => {
     fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apikey}&tags=${query}&sort=interestingness-desc&per_page=24&format=json&nojsoncallback=1`)
       .then(response => response.json())
@@ -44,21 +42,24 @@ class App extends Component {
       })
   }
 
-  retrieveImages = (query = 'mountains', state = 'pics') => {
+  // retrieves the images and puts them in state
+  retrieveImages = (query = 'mountains') => {
     this.runFetch(query, data => {
       this.setState({
-        [state]: data.photos.photo,
+        pics: data.photos.photo,
         search: null
       })
     })
   }
 
+  // sets the term to search for in state
   setSearch = (searchTerm) => {
     this.setState({
       search: searchTerm
     })
   }
 
+  // does image retrieval and redirect to the right route for searches
   searchRedirect = () => {
     if (this.state.search) {
       this.retrieveImages(this.state.search);

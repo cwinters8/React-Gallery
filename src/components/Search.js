@@ -5,7 +5,9 @@ class SearchForm extends Component {
   
   handleSubmit = e => {
     const searchTerm = this.query.value;
+    // don't actually submit the form
     e.preventDefault();
+    // update the URL
     this.props.history.push(`/search/${searchTerm}`);
     // remove class and aria attributes from nav links
     const navLinks = document.querySelectorAll('.main-nav a');
@@ -13,8 +15,9 @@ class SearchForm extends Component {
       elem.removeAttribute('class');
       elem.removeAttribute('aria-current');
     })
-
+    // set the search term in state
     this.props.setSearch(searchTerm);
+    // clear the search field
     e.currentTarget.reset();
   }
   
