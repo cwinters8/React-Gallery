@@ -7,6 +7,13 @@ class SearchForm extends Component {
     const searchTerm = this.query.value;
     e.preventDefault();
     this.props.history.push(`/search/${searchTerm}`);
+    // remove class and aria attributes from nav links
+    const navLinks = document.querySelectorAll('.main-nav a');
+    navLinks.forEach(elem => {
+      elem.removeAttribute('class');
+      elem.removeAttribute('aria-current');
+    })
+
     this.props.setSearch(searchTerm);
     e.currentTarget.reset();
   }
