@@ -6,8 +6,8 @@ class SearchForm extends Component {
   handleSubmit = e => {
     const searchTerm = this.query.value;
     e.preventDefault();
-    this.props.history.push(`/${searchTerm}`);
-    this.props.performSearch(searchTerm);
+    this.props.history.push(`/search/${searchTerm}`);
+    this.props.retrieveImages(searchTerm);
     e.currentTarget.reset();
   }
   
