@@ -1,9 +1,26 @@
 # React-Gallery
-A gallery web app built with React and using the Flickr API
+A gallery web app built with React. It uses the Flickr API to generate a gallery of photos based on the user's search.
 
 Seventh project in the [Team Treehouse](http://referrals.trhou.se/clarkwinters) Full Stack JavaScript Techdegree.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## How to run this app
+First, you need to create a `config.js` file in the `src/components` directory, which should contain the following two lines, replacing `yourapikey` with your own Flickr API key.
+```js
+const apikey = 'yourapikey';
+export default apikey;
+```
+Then, you can simply install the required packages and run the app.
+```bash
+npm install
+npm start
+```
+
+## Technologies Used
+React  
+React Router  
+JavaScript
 
 ## Available Scripts
 
