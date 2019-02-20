@@ -10,6 +10,7 @@ import apikey from './config.js';
 import SearchForm from './Search';
 import Nav from './Nav';
 import Gallery from './Gallery';
+import NotFound from './NotFound';
 
 const history = createBrowserHistory();
 
@@ -86,6 +87,8 @@ class App extends Component {
             {/* Search */}
             <Route path="/search/:term" render={() => <Gallery data={this.state.pics} loading={this.state.loading}/>} />
             {this.searchRedirect()}
+            {/* 404 handler */}
+            <Route component={NotFound} />
           </Switch>
         </div>
       </BrowserRouter>
