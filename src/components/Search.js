@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 class SearchForm extends Component {
   
   handleSubmit = e => {
+    this.props.setLoading();
     const searchTerm = this.query.value;
     // don't actually submit the form
     e.preventDefault();

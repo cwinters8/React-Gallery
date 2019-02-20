@@ -3,6 +3,7 @@ import React from 'react';
 // app components
 import GalleryItem from './GalleryItem';
 import NoResults from './NoResults';
+import Loading from './Loading';
 
 const Gallery = (props) => {
     let pics;
@@ -12,13 +13,15 @@ const Gallery = (props) => {
         pics = props.data.map(pic => {
             return(<GalleryItem desc={pic.title} key={pic.id} img={`https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`} />)
         })
-    } else {
+        // props.loadingFalse();
+    } else if (!props.loading) {
         pics = <NoResults />
     }
 
     return (
         <div className="photo-container">
             <h2>Results</h2>
+            <Loading loading={props.loading} />
             <ul>{pics}</ul>
         </div>
     )

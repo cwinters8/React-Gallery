@@ -19,7 +19,8 @@ class App extends Component {
     super();
     this.state = {
       pics: [],
-      search: null
+      search: null,
+      loading: true
     };
   }
 
@@ -39,7 +40,7 @@ class App extends Component {
       .then(response => response.json())
       .then(jsonData => {
         callback(jsonData);
-      })
+      });
   }
 
   // retrieves the images and puts them in state
@@ -47,7 +48,8 @@ class App extends Component {
     this.runFetch(query, data => {
       this.setState({
         pics: data.photos.photo,
-        search: null
+        search: null,
+        loading: false
       })
     })
   }
@@ -59,7 +61,7 @@ class App extends Component {
     })
   }
 
-  // does image retrieval and redirect to the right route for searches
+  // retrieves images and redirects to the appropriate route for searches
   searchRedirect = () => {
     if (this.state.search) {
       this.retrieveImages(this.state.search);
@@ -67,17 +69,22 @@ class App extends Component {
     }
   }
 
+  // callback function for the Gallery component to be able to set the loading state to false
+  setLoading = () => {
+    this.setState({loading: true})
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div className="container">
-          <Route path="/" render={() => <SearchForm setSearch={this.setSearch} history={history} />} />
-          <Nav setSearch={this.setSearch} />
+          <Route path="/" render={() => <SearchForm setSearch={this.setSearch} history={history} setLoading={this.setLoading} />} />
+          <Nav setSearch={this.setSearch} setLoading={this.setLoading} />
           <Switch>
             {/* Default route */}
-            <Route exact path="/" render={() => <Gallery data={this.state.pics}/>} />
+            <Route exact path="/" render={() => <Gallery data={this.state.pics} loading={this.state.loading}/>} />
             {/* Search */}
-            <Route path="/search/:term" render={() => <Gallery data={this.state.pics}/>} />
+            <Route path="/search/:term" render={() => <Gallery data={this.state.pics} loading={this.state.loading}/>} />
             {this.searchRedirect()}
           </Switch>
         </div>
