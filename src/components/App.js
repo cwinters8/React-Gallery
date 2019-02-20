@@ -79,6 +79,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
+          <h1 id="header">Image Gallery</h1>
           <SearchForm setSearch={this.setSearch} history={history} setLoading={this.setLoading} />
           <Nav setSearch={this.setSearch} setLoading={this.setLoading} />
           <Switch>
