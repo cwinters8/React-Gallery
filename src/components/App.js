@@ -69,7 +69,7 @@ class App extends Component {
     }
   }
 
-  // callback function for the Gallery component to be able to set the loading state to false
+  // callback function to set the loading state to true
   setLoading = () => {
     this.setState({loading: true})
   }

@@ -13,7 +13,6 @@ const Gallery = (props) => {
         pics = props.data.map(pic => {
             return(<GalleryItem desc={pic.title} key={pic.id} img={`https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`} />)
         })
-        // props.loadingFalse();
     } else if (!props.loading) {
         pics = <NoResults />
     }
