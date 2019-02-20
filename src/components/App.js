@@ -79,7 +79,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <Route path="/" render={() => <SearchForm setSearch={this.setSearch} history={history} setLoading={this.setLoading} />} />
+          <SearchForm setSearch={this.setSearch} history={history} setLoading={this.setLoading} />
           <Nav setSearch={this.setSearch} setLoading={this.setLoading} />
           <Switch>
             {/* Default route */}
