@@ -4,7 +4,7 @@ import {createBrowserHistory} from 'history';
 
 // style and config
 import '../App.css';
-// import apikey from './config.js';
+import apikey from './config.js';
 
 // App components
 import SearchForm from './Search';
@@ -12,7 +12,6 @@ import Nav from './Nav';
 import Gallery from './Gallery';
 import NotFound from './NotFound';
 
-const apikey = process.env.REACT_APP_APIKEY;
 const history = createBrowserHistory();
 
 class App extends Component {
