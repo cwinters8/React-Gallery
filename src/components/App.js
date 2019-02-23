@@ -33,7 +33,18 @@ class App extends Component {
     } else {
       this.retrieveImages();
     }
+
+    this.callApi()
+      .then(res => console.log({ response: res.msg }))
+      .catch(err => console.log(err));
   }
+
+  callApi = async () => {
+    const response = await fetch('/.netlify/lambda/lambda');
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
 
   // helper function to run the API call
   runFetch = (query, callback) => {

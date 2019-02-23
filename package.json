@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.3.3",
     "axios": "^0.18.0",
+    "babel-loader": "^8.0.5",
     "history": "^4.7.2",
+    "http-proxy-middleware": "^0.19.1",
+    "netlify-lambda": "^1.4.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-router": "^4.3.1",
