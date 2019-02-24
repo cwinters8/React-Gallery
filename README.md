@@ -6,12 +6,28 @@ Seventh project in the [Team Treehouse](http://referrals.trhou.se/clarkwinters) 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## How to run this app
-First, you need to create a `config.js` file in the `src/components` directory, which should contain the following two lines, replacing `yourapikey` with your own Flickr API key.
+This app is running on Netlify. If you'd like to see it, go [here](https://react-image-gallery.netlify.com/).
+
+If you really want to run it yourself, follow these steps.
+First, create the file `setupProxy.js` in the src directory, with the following contents. This is needed to run the app in dev, since it is configured to run with a Lambda backend on Netlify.
 ```js
-const apikey = 'yourapikey';
-export default apikey;
+const proxy = require('http-proxy-middleware');
+module.exports = function(app) {
+  app.use(
+    proxy('/.netlify/functions/', {
+      target: 'http://localhost:9000/',
+      pathRewrite: {
+        '^/\\.netlify/lambda': '',
+      },
+    }),
+  );
+};
 ```
-Then, you can simply install the required packages and run the app.
+Then, you need to set an environment variable for your API key in the same session where you'll start the app from.
+```bash
+export APIKEY='yourapikey'
+```
+Then you can simply install the required packages and run the app.
 ```bash
 npm install
 npm start
@@ -20,7 +36,8 @@ npm start
 ## Technologies Used
 React  
 React Router  
-JavaScript
+JavaScript  
+Lambda
 
 ## Available Scripts
 
