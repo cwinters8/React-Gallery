@@ -27,3 +27,4 @@ config.js
 
 # lambda
 /lambda
+setupProxy*
