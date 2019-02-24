@@ -25,4 +25,4 @@ yarn-error.log*
 # API key
 config.js
 
-setupProxy.save.js
+setupProxy.js

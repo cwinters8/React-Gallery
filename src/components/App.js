@@ -36,7 +36,7 @@ class App extends Component {
 
   // helper function to run the API call
   runFetch = (query, callback) => {
-    fetch(`/.netlify/lambda/lambda?q=${query}`)
+    fetch(`/.netlify/functions/lambda?q=${query}`)
       .then(response => response.json())
       .then(data => {
         const jsonData = JSON.parse(data.data);
