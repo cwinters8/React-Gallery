@@ -4,7 +4,6 @@ import {createBrowserHistory} from 'history';
 
 // style and config
 import '../App.css';
-import apikey from './config.js';
 
 // App components
 import SearchForm from './Search';
@@ -33,24 +32,14 @@ class App extends Component {
     } else {
       this.retrieveImages();
     }
-
-    this.callApi('lions')
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
   }
-
-  callApi = async (query) => {
-    const response = await fetch(`/.netlify/lambda/lambda?q=${query}`);
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body.data;
-  };
 
   // helper function to run the API call
   runFetch = (query, callback) => {
-    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apikey}&tags=${query}&sort=interestingness-desc&per_page=24&format=json&nojsoncallback=1`)
+    fetch(`/.netlify/lambda/lambda?q=${query}`)
       .then(response => response.json())
-      .then(jsonData => {
+      .then(data => {
+        const jsonData = JSON.parse(data.data);
         callback(jsonData);
       });
   }
