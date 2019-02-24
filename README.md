@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f098ef7f-dc9c-4bc3-aad2-140b97d3df05/deploy-status)](https://app.netlify.com/sites/react-image-gallery/deploys)
+
 # React-Gallery
 A gallery web app built with React. It uses the Flickr API to generate a gallery of photos based on the user's search.
 
